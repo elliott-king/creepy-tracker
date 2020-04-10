@@ -20,3 +20,5 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 gtag('config', 'UA-158940829-2');
+
+console.log("cookie: ", document.cookie);
