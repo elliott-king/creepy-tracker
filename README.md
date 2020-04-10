@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A webapp that will tell you what can and can't track you in your current session.
 
-Things you may want to cover:
+## Try it out
+Spin up using `rails s` (make sure to `bundle install`). Look through the code for some `byebug`s and re-enable them. You can look through the commits for what I have added. Currently, I have only connected Google's [gtag](https://developers.google.com/analytics/devguides/collection/gtagjs).
 
-* Ruby version
+The js file will print out all of your cookies to console. In rails, you can use `byebug` and `users_controller#google_tags` to see the gtag cookies.
 
-* System dependencies
+## Goals
+For each tracker, show if it is running in user browser session
 
-* Configuration
+#### Easy
+* Add gtag variable to rails `secrets`
 
-* Database creation
+#### Medium
 
-* Database initialization
+* Add google `analytics.js` (only have gtag currently)
+* Create our own session tracker
+* Try to identify independent users (by a browser fingerprint?)
 
-* How to run the test suite
+#### Medium-hard
+* Mine bitcoin in user's browser (3rd-party)
+* Tell a user how many times they have visited the site
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Hard
+* Mine bitcoin in user's browser (create our own)
