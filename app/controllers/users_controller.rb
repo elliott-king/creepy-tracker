@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  helper_method :google_tags
+
   def index
     # byebug
     render :index

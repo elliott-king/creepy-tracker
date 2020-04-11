@@ -1,3 +1,16 @@
 <%= javascript_include_tag "https://www.googletagmanager.com/gtag/js?id=UA-158940829-2", async: true%>
 
 <h1>How much of your data slips away from you?</h1>
+
+<div id="list_container">
+  <div>
+    <h3>Google Global Site Tag (gtag.js)</h3>
+    <p>
+      <% if google_tags[:_gat_gtag_UA_158940829_2] %>
+      Disabled
+      <% else %>
+      Enabled
+      <% end %>
+    </p>
+  </div>
+</div>
