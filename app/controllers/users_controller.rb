@@ -2,16 +2,23 @@ class UsersController < ApplicationController
   helper_method :google_tags
 
   def index
-    # byebug
+    puts google_tags
+    if google_tags[:ga]
+      @user = User.find_or_create_by(ga: google_tags[:ga])
+      @user.hits += 1
+      @user.save
+    else 
+      @user = User.new
+    end
     render :index
   end
 
   private
   def google_tags
     {
-      _gat_gtag_UA_158940829_2: cookies[:_gat_gtag_UA_158940829_2],
-      _ga: cookies[:ga],
-      _gid: cookies[:_gid]
+      gat_gtag_UA_158940829_2: cookies[:_gat_gtag_UA_158940829_2],
+      ga: cookies[:_ga],
+      gid: cookies[:_gid]
     }
   end
 end

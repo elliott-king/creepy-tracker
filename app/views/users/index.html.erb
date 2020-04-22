@@ -7,10 +7,14 @@
     <h3>Google Global Site Tag (gtag.js)</h3>
     <p>
       <% if google_tags[:_gat_gtag_UA_158940829_2] %>
-      Disabled
-      <% else %>
       Enabled
+      <% else %>
+      Disabled
       <% end %>
     </p>
+  </div>
+  <div>
+    <h3>Number of times you have visited</h3>
+    <p><%= @user.hits %></p>
   </div>
 </div>
