@@ -15,6 +15,7 @@ For each tracker, show if it is running in user browser session
 
 #### Medium
 
+* Add bootstrap to site
 * Add google `analytics.js` (only have gtag currently)
 * Create our own session tracker
 * Try to identify independent users (by a browser fingerprint?)
@@ -22,6 +23,14 @@ For each tracker, show if it is running in user browser session
 #### Medium-hard
 * Mine bitcoin in user's browser (3rd-party)
 * Tell a user how many times they have visited the site
+* Make sure we wait for tracker scripts to load up before displaying results
 
 #### Hard
 * Mine bitcoin in user's browser (create our own)
+
+
+## Analytics sources to try
+* [Matomo](matomo.org) - google analytics OSS competitor 
+
+## Resources
+- [3rd-party guide to google cookies](https://www.optimizesmart.com/google-analytics-cookies-ultimate-guide/#a4)
