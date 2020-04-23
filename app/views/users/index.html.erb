@@ -17,4 +17,8 @@
     <h3>Number of times you have visited</h3>
     <p><%= @user.hits %></p>
   </div>
+  <div>
+    <h3>Last visit</h3>
+    <p><%= @last_visit ? @last_visit : "You have not visited before."%></p>
+  </div>
 </div>

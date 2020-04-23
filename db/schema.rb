@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_134309) do
+ActiveRecord::Schema.define(version: 2020_04_23_191611) do
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "ga"
     t.integer "hits", default: 0
+    t.datetime "last_visit"
   end
 
 end
