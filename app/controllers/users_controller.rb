@@ -17,6 +17,12 @@ class UsersController < ApplicationController
     render :index
   end
 
+  def create
+    # Handling AJAX on server side: https://guides.rubyonrails.org/working_with_javascript_in_rails.html#server-side-concerns
+    user_info = params[:user_info].permit!.merge(browser_measurements)
+    # byebug
+  end
+
   private
   def google_tags
     {
