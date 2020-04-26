@@ -7,6 +7,11 @@ Spin up using `rails s` (make sure to `bundle install`). Look through the code f
 
 The js file will print out all of your cookies to console. In rails, you can use `byebug` and `users_controller#google_tags` to see the gtag cookies.
 
+## Notes
+For the browser fingerprinting, I tried to follow EFF's panopticlick method. There are a few differences, though, for the sake of simplicity:
+- I did not use PluginDetect, and did not bother doing anything special for IE
+- I have not (yet) implemented supercookie tracking
+
 ## Goals
 For each tracker, show if it is running in user browser session
 
@@ -34,3 +39,5 @@ For each tracker, show if it is running in user browser session
 
 ## Resources
 - [3rd-party guide to google cookies](https://www.optimizesmart.com/google-analytics-cookies-ultimate-guide/#a4)
+- [Browser Uniqueness EFF](https://panopticlick.eff.org/static/browser-uniqueness.pdf)
+- [fingerprintjs2](https://github.com/Valve/fingerprintjs2)

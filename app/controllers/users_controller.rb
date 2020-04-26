@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   helper_method :google_tags
 
   def index
-    puts google_tags
     if google_tags[:ga]
       @user = User.find_or_create_by(ga: google_tags[:ga])
 
@@ -24,6 +23,16 @@ class UsersController < ApplicationController
       gat_gtag_UA_158940829_2: cookies[:_gat_gtag_UA_158940829_2],
       ga: cookies[:_ga],
       gid: cookies[:_gid]
+    }
+  end
+
+  def browser_measurements
+    {
+      user_agent: request.user_agent,
+      accept_headers: request.headers[:accept],
+      accept_encoding: request.headers["accept-encoding"],
+      accept_language: request.headers["accept-language"],
+      cookies_enabled: !request.cookies.blank?,
     }
   end
 end
