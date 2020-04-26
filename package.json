@@ -10,6 +10,10 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "eslint": "^6.8.0",
     "webpack-dev-server": "^3.10.3"
+  },
+  "scripts": {
+    "lint": "npx eslint app/javascript/custom/**"
   }
 }
