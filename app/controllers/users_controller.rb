@@ -19,7 +19,42 @@ class UsersController < ApplicationController
 
   def create
     # Handling AJAX on server side: https://guides.rubyonrails.org/working_with_javascript_in_rails.html#server-side-concerns
+    # TODO: serialize plugins like they do @ panopticlick.eff.org
+    # byebug
     user_info = params[:user_info].permit!.merge(browser_measurements)
+    user_info = user_info.to_s
+    user =  User.find_by(fingerprint: user_info)
+    if user
+      # exists, check _ga?
+      if google_tags[:ga]
+        if user[:ga] == google_tags[:ga]
+          puts "User retrieved by serialized fingerprint. _ga matches."
+        else
+          puts "User retrieved by serialized fingerprint. _ga does not match."
+        end
+      else
+        if user[:ga]
+          puts "Browser has no _ga, but user does, id: #{user[:id]}"
+        else
+          puts "Successfully fetched user who is blocking _ga, id: #{user[:id]}."
+        end
+      end
+    else
+      # user serialization dne
+      if google_tags[:ga]
+        user = User.find_or_create_by(ga: google_tags[:ga])
+        if user[:fingerprint]
+          puts "User is identified by their _ga, but the serialized info does not match"
+        else
+          user[:fingerprint] = user_info
+          user.save
+          puts "Adding serialized tag to user #{user[:id]}"
+        end
+      else
+        user = User.create(fingerprint: user_info)
+        puts "Created new user with no _ga, id: #{user[:id]}"
+      end
+    end
     # byebug
   end
 
@@ -35,10 +70,20 @@ class UsersController < ApplicationController
   def browser_measurements
     {
       user_agent: request.user_agent,
+      # TODO: not sure where the accept text/html header is
       accept_headers: request.headers[:accept],
       accept_encoding: request.headers["accept-encoding"],
       accept_language: request.headers["accept-language"],
       cookies_enabled: !request.cookies.blank?,
     }
+  end
+
+  def serialize_user_info(user_info)
+    s = "#{user_info[:width]}x#{user_info[:height]}x#{user_info[:depth]}"
+    s += "#{user_info[:user_agent]}#{user_info[:accept_headers]}#{user_info[:accept_encoding]}#{user_info[:accept_language]}"
+    s += user_info[:cookies_enabled].to_s
+    s += user_info[:timezone].to_s
+    s += user_info[:fonts].join("")
+    s += user_info[:plugins].join("")
   end
 end
