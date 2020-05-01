@@ -23,37 +23,13 @@ class UsersController < ApplicationController
     # byebug
     user_info = params[:user_info].permit!.merge(browser_measurements)
     user_info = user_info.to_s
-    user =  User.find_by(fingerprint: user_info)
-    if user
-      # exists, check _ga?
-      if google_tags[:ga]
-        if user[:ga] == google_tags[:ga]
-          puts "User retrieved by serialized fingerprint. _ga matches."
-        else
-          puts "User retrieved by serialized fingerprint. _ga does not match."
+    @fingerprint_user =  User.find_or_create_by(fingerprint: user_info)
+    if @fingerprint_user.last_visit
+      @fingerprint_last_visit = @fingerprint_user.last_visit
         end
-      else
-        if user[:ga]
-          puts "Browser has no _ga, but user does, id: #{user[:id]}"
-        else
-          puts "Successfully fetched user who is blocking _ga, id: #{user[:id]}."
-        end
-      end
-    else
-      # user serialization dne
-      if google_tags[:ga]
-        user = User.find_or_create_by(ga: google_tags[:ga])
-        if user[:fingerprint]
-          puts "User is identified by their _ga, but the serialized info does not match"
-        else
-          user[:fingerprint] = user_info
-          user.save
-          puts "Adding serialized tag to user #{user[:id]}"
-        end
-      else
-        user = User.create(fingerprint: user_info)
-        puts "Created new user with no _ga, id: #{user[:id]}"
-      end
+    @fingerprint_user.hits += 1
+    @fingerprint_user.last_visit = Time.now 
+    @fingerprint_user.save
     end
     # byebug
   end
