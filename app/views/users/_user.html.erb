@@ -1,3 +1,9 @@
-<p>Got user: <%= @fingerprint_user[:id] %> </p>
-<p>User has visited: <%= @fingerprint_user[:hits] %> time(s).</p>
-<p>Last visited: <%= @fingerprint_last_visit%></p>
+<h3>Individual Fingerprint</h3>
+<div>
+  <h3>Number of times you have visited</h3>
+  <p><%= @fingerprint_user.hits %></p>
+</div>
+<div>
+  <h3>Last visit</h3>
+  <p><%= @fingerprint_last_visit ? @fingerprint_last_visit : "You have not visited before."%></p>
+</div>

@@ -20,7 +20,6 @@ class UsersController < ApplicationController
   def create
     # Handling AJAX on server side: https://guides.rubyonrails.org/working_with_javascript_in_rails.html#server-side-concerns
     # TODO: serialize plugins like they do @ panopticlick.eff.org
-    # byebug
     user_info = params[:user_info].permit!.merge(browser_measurements)
     user_info = user_info.to_s
     @fingerprint_user =  User.find_or_create_by(fingerprint: user_info)
@@ -41,6 +40,7 @@ class UsersController < ApplicationController
   private
   def google_tags
     {
+      # TODO: the first one might not fit -> may be session-specific name?
       gat_gtag_UA_158940829_2: cookies[:_gat_gtag_UA_158940829_2],
       ga: cookies[:_ga],
       gid: cookies[:_gid]

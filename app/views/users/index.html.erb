@@ -2,25 +2,27 @@
 
 <h1>How much of your data slips away from you?</h1>
 
-<div id="list_container">
-  <div>
+<div class="container">
+<div class="row">
+  <div class="col" id="ga">
     <h3>Google Global Site Tag (gtag.js)</h3>
     <p>
-      <% if google_tags[:_gat_gtag_UA_158940829_2] %>
+      <% if google_tags[:ga] %>
       Enabled
       <% else %>
       Disabled
       <% end %>
     </p>
+    <div>
+      <h3>Number of times you have visited</h3>
+      <p><%= @user.hits %></p>
+    </div>
+    <div>
+      <h3>Last visit</h3>
+      <p><%= @last_visit ? @last_visit : "You have not visited before."%></p>
+    </div>
   </div>
-  <div>
-    <h3>Number of times you have visited</h3>
-    <p><%= @user.hits %></p>
+  <div id="fingerprint" class="col">
   </div>
-  <div>
-    <h3>Last visit</h3>
-    <p><%= @last_visit ? @last_visit : "You have not visited before."%></p>
-  </div>
-  <div id="fingerprint">
-  </div>
+</div>
 </div>
