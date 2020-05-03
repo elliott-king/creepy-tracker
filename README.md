@@ -41,3 +41,4 @@ For each tracker, show if it is running in user browser session
 - [3rd-party guide to google cookies](https://www.optimizesmart.com/google-analytics-cookies-ultimate-guide/#a4)
 - [Browser Uniqueness EFF](https://panopticlick.eff.org/static/browser-uniqueness.pdf)
 - [fingerprintjs2](https://github.com/Valve/fingerprintjs2)
+- [Discussion on fingerprinting browsers with JS, StackOverflow](https://stackoverflow.com/questions/44030666)

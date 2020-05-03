@@ -20,6 +20,11 @@ window.onload = () => {
     // JS for Rails auth token: https://stackoverflow.com/questions/7560837
     const token = document.querySelector('meta[name="csrf-token"]').content
     xhttp.setRequestHeader('X-CSRF-Token', token)
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.querySelector('#fingerprint').innerHTML = this.response;
+       }
+    };
     xhttp.send(JSON.stringify({user_info: userInfo}));
   });
 }

@@ -26,12 +26,16 @@ class UsersController < ApplicationController
     @fingerprint_user =  User.find_or_create_by(fingerprint: user_info)
     if @fingerprint_user.last_visit
       @fingerprint_last_visit = @fingerprint_user.last_visit
-        end
+    end
     @fingerprint_user.hits += 1
     @fingerprint_user.last_visit = Time.now 
     @fingerprint_user.save
+    
+    respond_to do |format|
+      format.html { render @fingerprint_user, notice: "Successfully identified user by fingerprint." }
+      format.json { render json: @fingerprint_user, status: :created, head: :ok, location: @fingerprint_user}
     end
-    # byebug
+    
   end
 
   private
