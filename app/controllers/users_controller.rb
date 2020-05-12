@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def create
     # Handling AJAX on server side: https://guides.rubyonrails.org/working_with_javascript_in_rails.html#server-side-concerns
     # TODO: serialize plugins like they do @ panopticlick.eff.org
-    user_info = params[:user_info].permit!.merge(browser_measurements)
+    user_info = browser_fingerprint.merge(request_fingerprint)
     user_info = user_info.to_s
     @fingerprint_user =  User.find_or_create_by(fingerprint: user_info)
     if @fingerprint_user.last_visit
@@ -47,7 +47,10 @@ class UsersController < ApplicationController
     }
   end
 
-  def browser_measurements
+  def browser_fingerprint
+    params[:user_info].permit(:width, :height, :depth, :timezone, :plugins => [], :fonts => [])
+  end
+  def request_fingerprint
     {
       user_agent: request.user_agent,
       # TODO: not sure where the accept text/html header is
