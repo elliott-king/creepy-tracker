@@ -22,10 +22,10 @@ window.onload = () => {
     xhttp.setRequestHeader('X-CSRF-Token', token)
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.querySelector('#fingerprint').innerHTML = this.response;
+            document.querySelector('#response-container').innerHTML = this.response;
        }
     };
-    xhttp.send(JSON.stringify({user_info: userInfo}));
+    xhttp.send(JSON.stringify({fingerprint: userInfo}));
   });
 }
 

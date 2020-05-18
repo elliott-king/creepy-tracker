@@ -1,9 +1,49 @@
-<h3>Individual Fingerprint</h3>
-<div>
-  <h3>Number of times you have visited</h3>
-  <p><%= @fingerprint_user.hits %></p>
+<div class="container" id="ga">
+    <h3 class="row lead-3">Can I track you with Google cookies?</h3>
+    <p class="row"><strong>
+      <% if google_tags[:ga] %>
+      Yes
+      <% else %>
+      No
+      <% end %>
+    </strong></p>
+  <div class="row">
+    <p>According to the gtag cookie:</p>
+  </div>
+  <div class="row visit-info">
+    <div class="hits card text-center" >
+      <div class="card-body">
+        <h5 class="card-title"><%= @ga_user.hits %></h5>
+        <hr class="solid">
+        <p>Number of times you have visited</p>
+      </div>
+    </div>
+    <div class="visit card text-center">
+      <div class="card-body">
+        <h5 class="card-title""><%= @last_visit ? @last_visit : "You have not visited before."%></h5>
+        <hr class="solid">
+        <p>Your last visit</p>
+      </div>
+    </div>
+  </div>
 </div>
-<div>
-  <h3>Last visit</h3>
-  <p><%= @fingerprint_last_visit ? @fingerprint_last_visit : "You have not visited before."%></p>
+<div class="container" id="fingerprint">
+  <h3 class="row lead-3">Can I uniquely identify you by your browser fingerprint?</h3>
+  <p class="row">See if the following applies to you:</p>
+  <div class="row visit-info">
+    <div class="hits card text-center">
+      <div class="card-body">
+        <h5><%= @fingerprint_user.hits %></h5>
+        <hr class="solid">
+        <p>Number of times you have visited</p>
+      </div>
+    </div>
+    <div class="visit card text-center">
+      <div class="card-body">
+        <h5><%= @fingerprint_last_visit ? @fingerprint_last_visit : "You have not visited before."%></h5>
+        <hr class="solid">
+        <p>Your last visit</p>
+      </div>
+    </div>
+  </div>
 </div>
