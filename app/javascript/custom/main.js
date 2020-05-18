@@ -38,13 +38,15 @@ function userInformation(callback) {
   plugins.sort(); // EFF sorts this to reduce entropy
 
   jsFontsKey((available) => {
-    callback({
+    const fingerprint = {
       width: screen.width,
       height: screen.height,
       depth: screen.pixelDepth,
       timezone: new Date().getTimezoneOffset().toString(),
       plugins: plugins.toString(),
       fonts: available.toString(),
-    });
+    };
+    console.log('fingerprint', fingerprint);
+    callback(fingerprint);
   });
 }
