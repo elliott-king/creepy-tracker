@@ -35,15 +35,16 @@ function userInformation(callback) {
     let plugin = window.navigator.plugins[i];
     plugins.push(plugin.name + "; " + plugin.description + "; " + plugin.filename + "; ");
   }
+  plugins.sort(); // EFF sorts this to reduce entropy
 
   jsFontsKey((available) => {
     callback({
       width: screen.width,
       height: screen.height,
       depth: screen.pixelDepth,
-      timezone: new Date().getTimezoneOffset(),
-      plugins: plugins,
-      fonts: available,
+      timezone: new Date().getTimezoneOffset().toString(),
+      plugins: plugins.toString(),
+      fonts: available.toString(),
     });
   });
 }

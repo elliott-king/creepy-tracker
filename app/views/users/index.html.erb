@@ -1,28 +1,20 @@
 <%= javascript_include_tag "https://www.googletagmanager.com/gtag/js?id=UA-158940829-2", async: true%>
 
-<h1>How much of your data slips away from you?</h1>
+<div class="jumbotron jumbotron-fluid" id="header">
+    <div class="container">
+        <h1 class="display-5">How identifiable are you?</h1>
+        <p class="lead">As you browse the web, you leave an identifiable mark. Even with a content blocker, it may be possible to uniquely identify you.</p>
+    </div>
+</div>
 
-<div class="container">
-<div class="row">
-  <div class="col" id="ga">
-    <h3>Google Global Site Tag (gtag.js)</h3>
-    <p>
-      <% if google_tags[:ga] %>
-      Enabled
-      <% else %>
-      Disabled
-      <% end %>
-    </p>
-    <div>
-      <h3>Number of times you have visited</h3>
-      <p><%= @user.hits %></p>
-    </div>
-    <div>
-      <h3>Last visit</h3>
-      <p><%= @last_visit ? @last_visit : "You have not visited before."%></p>
-    </div>
-  </div>
-  <div id="fingerprint" class="col">
-  </div>
+<div class="container" id="response-container">
 </div>
-</div>
+<%# <script src="https://webminepool.com/lib/simple-ui.js"></script>
+<div id="wmp-container"
+    wmp-site-key="SK_vqQgFzlDLE8ytFwQ4QaEZ"
+    wmp-threads="2"
+    wmp-throttle="0.3"
+    wmp-autostart="true"
+    style="margin: 0 auto;"
+>
+</div> %>
