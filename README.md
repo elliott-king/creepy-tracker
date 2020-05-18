@@ -7,9 +7,9 @@ As of 5/18/20, it uses two seperate methods to uniquely identify the user. For e
   2. Fingerprinting the user's browser using various methods
 
 ## Try it out
-Spin up using `rails s` (make sure to `bundle install` and `rails db:create && rails db:migrate`). Take a look at `users_controller.rb` and put some byebugs in different places. You can look through the commits for what I have added. Currently, I have only connected Google's [gtag](https://developers.google.com/analytics/devguides/collection/gtagjs).
+Spin up using `rails s` (make sure to `bundle install` and `rails db:create && rails db:migrate`). Take a look at `users_controller.rb` and put some byebugs in different places. You can look through the commits for what I have added. Currently, my only 3rd-party tracker is Google's [gtag](https://developers.google.com/analytics/devguides/collection/gtagjs).
 
-The js file will print out all of your cookies to console. In rails, you can use `byebug` and `users_controller#google_tags` to see the gtag cookies.
+The js file (`main.js`) will print out all of your cookies to console. In rails, you can use `byebug` with `users_controller#google_tags` to see the gtag cookies. Note that the page needs to first submit a POST request to `/create` before you will get anything in rails.
 
 ## Notes
 For the browser fingerprinting, I tried to follow EFF's [panopticlick method](https://panopticlick.eff.org/static/browser-uniqueness.pdf). There are a few differences, though, for the sake of simplicity:
@@ -21,6 +21,7 @@ For each tracker, show if it is running in user browser session
 
 #### Easy
 * Add gtag variable to rails `secrets`
+* More in-depth explanation of fingerprinting process
 
 #### Medium
 
