@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     @ga_user.last_visit = Time.now
     @ga_user.save
     
-    @fingerprint_user = user_by_fingerprint()
+    @fingerprint = Fingerprint.find_or_create_by(browser_fingerprint.merge(request_fingerprint))
+    @fingerprint_user = user_by_fingerprint(@fingerprint)
     if @fingerprint_user.last_visit
       @fingerprint_last_visit = @fingerprint_user.last_visit
       @fingerprint_user.hits += 1
@@ -25,7 +26,15 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       format.html { render @fingerprint_user, notice: "Successfully identified user by fingerprint." }
-      format.json { render :json => { :fingerprint_user => @fingerprint_user, :ga_user => @ga_user }, status: :created, head: :ok, location: @fingerprint_user}
+      format.json { render :json => {
+          :fingerprint_user => @fingerprint_user, 
+          :ga_user => @ga_user, 
+          :fingerprint => @fingerprint
+        }, 
+        status: :created, 
+        head: :ok, 
+        location: @fingerprint_user
+      }
     end
     
   end
@@ -66,8 +75,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_by_fingerprint()
-    fingerprint = Fingerprint.find_or_create_by(browser_fingerprint.merge(request_fingerprint))
+  def user_by_fingerprint(fingerprint)
     if fingerprint.user
       return fingerprint.user 
     end

@@ -1,4 +1,4 @@
-<div class="container" id="ga">
+<div class="container" id="ga-user">
     <h3 class="row lead-3">Can I track you with Google cookies?</h3>
     <p class="row"><strong>
       <% if google_tags[:ga] %>
@@ -28,7 +28,7 @@
   </div>
 </div>
 <br>
-<div class="container" id="fingerprint">
+<div class="container" id="fingerprint-user">
   <h3 class="row lead-3">Can I uniquely identify you by your browser fingerprint?</h3>
   <p class="row">See if the following applies to you:</p>
   <div class="row visit-info">
@@ -47,4 +47,20 @@
       </div>
     </div>
   </div>
+</div>
+<br/>
+<div class="container" id="fingerprint">
+  <h3 class="row lead-3">Your fingerprint</h3>
+  <table class="table">
+    <tr>
+      <th>Identifier</th>
+      <th>Value</th>
+    </tr>
+    <% Fingerprint.FINGERPRINT_IDENTIFIERS.each do |identifier|%>
+      <tr>
+        <td><%= identifier %></td>
+        <td><%= @fingerprint.send(identifier)%></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
