@@ -2,7 +2,9 @@
 ### A webapp that will tell you what can and can't track you in your current session.
 [Webapp](https://creepy-tracker.herokuapp.com/)
 
-![website snapshot](.github/images/Screen%20Shot%202020-07-16%20at%209.29.38%20AM.png "What you might see")
+<kbd>
+  <img alt="website snapshot" src=".github/images/Screen%20Shot%202020-07-16%20at%209.29.38%20AM.png" title="What you might see" />
+</kbd>
 
 We two seperate methods to uniquely identify the user. For each, it will keep track of how many times the user has visited, and when the last visit was.
   1. Google's gtag.js
